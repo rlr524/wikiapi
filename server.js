@@ -22,42 +22,47 @@ const articlesSchema = {
 
 const Article = mongoose.model("Article", articlesSchema);
 
-// const jackEntry = new Article({
-//   title: "Jack Bauer",
-//   content:
-//     "Jack Bauer once stepped into quicksand. The quicksand couldn't escape and nearly drowned."
-// });
+app
+  .route("/articles")
 
-// jackEntry.save();
+  .get((req, res) => {
+    Article.find({}, (err, foundArticles) => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(foundArticles);
+      }
+    });
+  })
 
-app.get("/articles", (req, res) => {
-  Article.find({}, (err, foundArticles) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(foundArticles);
-    }
-  });
-});
+  .post((req, res) => {
+    const newArticle = new Article({
+      title: req.body.title,
+      content: req.body.content
+    });
+    newArticle.save(err => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send(
+          "Successfully added a new article with the title " +
+            "'" +
+            newArticle.title +
+            "'"
+        );
+      }
+    });
+  })
 
-app.post("/articles", (req, res) => {
-  const newArticle = new Article({
-    title: req.body.title,
-    content: req.body.content
+  .delete((req, res) => {
+    Article.deleteMany({}, err => {
+      if (err) {
+        res.send(err);
+      } else {
+        res.send("Successfully deleted all articles");
+      }
+    });
   });
-  newArticle.save(err => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(
-        "Successfully added a new article with the title " +
-          "'" +
-          newArticle.title +
-          "'"
-      );
-    }
-  });
-});
 
 app.listen(process.env.PORT || 3000, () => {
   let port = process.env.PORT || 3000;
