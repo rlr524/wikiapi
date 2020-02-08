@@ -1,10 +1,11 @@
 {
   "name": "wikiapi",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Wiki API from LAB course",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "Rob Ranf",
   "license": "ISC",
@@ -20,5 +21,13 @@
   },
   "devDependencies": {
     "eslint": "^6.8.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rlr524/wikiapi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rlr524/wikiapi/issues"
+  },
+  "homepage": "https://github.com/rlr524/wikiapi#readme"
 }
