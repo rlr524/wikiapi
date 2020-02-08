@@ -24,7 +24,7 @@ const articlesSchema = new Schema(
     content: String,
     deleted: Boolean
   },
-  { timestamps: { createdAt: "created_at" } }
+  { timestamps: true }
 );
 
 const Article = mongoose.model("Article", articlesSchema);
